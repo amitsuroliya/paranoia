@@ -16,7 +16,7 @@ module Paranoia
   end
 
   def destroy
-    _run_callbacks(:destroy) { delete }
+    run_callbacks(:destroy) { delete }
   end
 
   def delete
