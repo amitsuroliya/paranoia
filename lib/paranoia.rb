@@ -29,7 +29,7 @@ module Paranoia
   def destroyed?
     !self.deleted_at.nil?
   end
-  alias :deleted? :destroyed?
+  alias_method :deleted? :destroyed?
 
   private
 
