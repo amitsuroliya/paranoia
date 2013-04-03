@@ -18,12 +18,12 @@ module Paranoia
   end
 
   def delete
-    update_attribute_or_column(:deleted_at, Time.now) if !deleted? && persisted?
+    self.update_attribute(:deleted_at, Time.now) if !deleted? && persisted?
     freeze
   end
 
   def restore!
-    update_attribute_or_column :deleted_at, nil
+    update_attribute :deleted_at, nil
   end
 
   def destroyed?
