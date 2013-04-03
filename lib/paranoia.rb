@@ -18,18 +18,18 @@ module Paranoia
   end
 
   def delete
-    self.update_attribute(:deleted_at, Time.now) if !deleted? && persisted?
+    self.update_attribute_or_column(:deleted_at, Time.now) if !deleted? && persisted?
     freeze
   end
 
   def restore!
-    update_attribute :deleted_at, nil
+    update_attribute_or_column :deleted_at, nil
   end
 
   def destroyed?
     !self.deleted_at.nil?
   end
-  alias_method :deleted? :destroyed?
+  alias :deleted? :destroyed?
 
   private
 
