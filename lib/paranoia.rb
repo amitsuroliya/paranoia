@@ -18,7 +18,7 @@ module Paranoia
   end
 
   def delete
-    self.update_attribute_or_column(:deleted_at, Time.now) if !deleted? && persisted?
+    update_attribute_or_column(:deleted_at, Time.now) if !deleted? && persisted?
     freeze
   end
 
