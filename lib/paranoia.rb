@@ -7,11 +7,9 @@ module Paranoia
     def paranoid? ; true ; end
 
     def only_deleted
-      scoped.tap { |x| x.default_scoped = false }.where("deleted_at is not null")
-    end
-
-    def with_deleted
-      scoped.tap { |x| x.default_scoped = false }
+      unscoped {
+        where("deleted_at is not null")
+      }
     end
   end
 
