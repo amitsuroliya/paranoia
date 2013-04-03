@@ -7,7 +7,7 @@ module Paranoia
     def paranoid? ; true ; end
 
     def only_deleted
-      scoped.tap { |x| x.default_scoped = false }.where("#{self.table_name}.deleted_at is not null")
+      scoped.tap { |x| x.default_scoped = false }.where("deleted_at is not null")
     end
 
     def with_deleted
@@ -16,7 +16,7 @@ module Paranoia
   end
 
   def destroy
-    run_callbacks(:destroy) { delete }
+    _run_callbacks(:destroy) { delete }
   end
 
   def delete
@@ -43,8 +43,8 @@ end
 
 class ActiveRecord::Base
   def self.acts_as_paranoid
-    alias :destroy! :destroy
-    alias :delete!  :delete
+    alias_method :destroy! :destroy
+    alias_method :delete!  :delete
     include Paranoia
     default_scope :conditions => { :deleted_at => nil }
   end
